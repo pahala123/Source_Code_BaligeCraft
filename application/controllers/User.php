@@ -403,6 +403,6 @@ class User extends CI_Controller
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('username');
         $this->session->set_flashdata('logout-user', 'berhasil');
-        redirect('auth');
+        redirect(base_url('/'));
     }
 }

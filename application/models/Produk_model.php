@@ -69,12 +69,21 @@ class Produk_Model extends CI_Model
         $this->db->from('produk');
         // Join dg 2 tabel
         $this->db->join('kategori', 'kategori.id = produk.produk_kategori', 'LEFT');
+        $this->db->where('produk_user_id = ', $this->session->userdata('penjual_id'));
         // End join
         $this->db->order_by('produk_id', 'ASC');
         $query = $this->db->get();
         return $query->result();
     }
 
+    public function get_nama_penjual($id){
+        $sql = "SELECT * FROM produk WHERE produk_id = ? LIMIT ?";
+        $exec =$this->db->query($sql, array($id, 1));
+        $result = $exec->result();
+        $query = "SELECT * FROM penjual where penjual_id = ? LIMIT ?";
+        $execute = $this->db->query($query, array($result[0]->produk_user_id, 1));
+        return $execute->result();
+    }
 
     public function get_all_product()
     {

@@ -22,7 +22,7 @@ class Produk extends CI_Controller
     {
         $data                       = array();
         $email                      = $this->session->userdata('email');
-        $data               = $this->user_model->get($email);
+        $data                       = $this->user_model->get($email);
         $data['get_detail_product'] = $this->produk_model->get_single_product($id);
         $data['get_all_category']   = $this->produk_model->get_all_category();
         $isi['title'] = "Detail Produk";
@@ -54,10 +54,12 @@ class Produk extends CI_Controller
         $email                      = $this->session->userdata('email');
         $data                       = $this->user_model->get($email);
         $data['get_detail_product'] = $this->produk_model->get_single_product($id);
+        $data['get_nama_penjual']   = $this->produk_model->get_nama_penjual($id);
         $data['get_all_category']   = $this->produk_model->get_all_category();
         $data['record']             = $this->model_app->view('ulasan');
         $data['row']                = $this->model_app->get_ulasan();
         $isi['title']               = "Detail Produk";
+        // var_dump($data['get_nama_penjual']);die;
         $this->load->view('templates/header_userdashboard', $isi);
         $this->load->view('user/product_detail', $data);
         $this->load->view('templates/footer_userdashboard');
@@ -232,9 +234,9 @@ class Produk extends CI_Controller
                 $params['total']        = $this->input->post('total');
                 $this->session->set_userdata('order_quantity', $items);
                 $this->session->set_userdata('total_price', $params['total']);
-                $this->load->view('templates/header_userdashboard', $title);
+                // $this->load->view('templates/header_userdashboard', $title);
                 $this->load->view('user/checkout', $params);
-                $this->load->view('templates/footer_userdashboard');
+                // $this->load->view('templates/footer_userdashboard');
                 break;
 
             case 'order':
