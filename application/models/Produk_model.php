@@ -105,6 +105,16 @@ class Produk_Model extends CI_Model
         return $info->row();
     }
 
+    public function getOneProduct($id){
+        $this->db->select('*');
+        $this->db->from('produk');
+        $this->db->where('produk_id', $id);
+        $this->db->order_by('produk_id', 'ASC');
+        $this->db->limit(1);
+        $data = $this->db->get();
+        return $data->row();
+    }
+
     public function get_all_category()
     {
         $this->db->select('*');

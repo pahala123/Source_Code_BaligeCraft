@@ -293,6 +293,11 @@ class Produk extends CI_Controller
                     $items[$n]['order_qty'] = $data['qty'];
                     $items[$n]['order_price'] = $data['price'];
                     $n++;
+                    
+                    $produk = $this->produk_model->getOneProduct($id);
+                    var_dump($produk);die;
+                    $produk['produk_kuantitas'] -= $data['qty'];
+                    $produk->update();
                 }
 
                 $this->user_model->create_order_items($items);
