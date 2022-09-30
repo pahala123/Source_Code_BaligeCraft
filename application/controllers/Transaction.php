@@ -16,7 +16,6 @@ class Transaction extends CI_Controller
 
 	public function process()
 	{
-		var_dump('tes');die;
 		$order_id = $this->input->post('order_id');
 		$action = $this->input->post('action');
 		switch ($action) {

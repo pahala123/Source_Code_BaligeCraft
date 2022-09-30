@@ -29,6 +29,10 @@ class Produk_Model extends CI_Model
         return $query->result();
     }
 
+    public function editQty($qty, $id){
+        $this->db->where('produk_id', $id);
+		$this->db->update('produk', $qty);
+    }
 
     // Listing berita
     public function produk_terbaik($limit, $start)
@@ -62,6 +66,15 @@ class Produk_Model extends CI_Model
         return $query->result();
     }
 
+    public function getOneProduct($id){
+        $this->db->select('*');
+        $this->db->from('produk');
+        $this->db->where('produk_id', $id);
+        $this->db->order_by('produk_id', 'ASC');
+        $this->db->limit(1);
+        $data = $this->db->get();
+        return $data->row();
+    }
 
     public function listing()
     {
@@ -103,16 +116,6 @@ class Produk_Model extends CI_Model
         $this->db->where('produk.produk_id', $id);
         $info = $this->db->get();
         return $info->row();
-    }
-
-    public function getOneProduct($id){
-        $this->db->select('*');
-        $this->db->from('produk');
-        $this->db->where('produk_id', $id);
-        $this->db->order_by('produk_id', 'ASC');
-        $this->db->limit(1);
-        $data = $this->db->get();
-        return $data->row();
     }
 
     public function get_all_category()
