@@ -29,6 +29,10 @@ class Produk_Model extends CI_Model
         return $query->result();
     }
 
+    public function editQty($qty, $id){
+        $this->db->where('produk_id', $id);
+		$this->db->update('produk', $qty);
+    }
 
     // Listing berita
     public function produk_terbaik($limit, $start)
@@ -62,6 +66,15 @@ class Produk_Model extends CI_Model
         return $query->result();
     }
 
+    public function getOneProduct($id){
+        $this->db->select('*');
+        $this->db->from('produk');
+        $this->db->where('produk_id', $id);
+        $this->db->order_by('produk_id', 'ASC');
+        $this->db->limit(1);
+        $data = $this->db->get();
+        return $data->row();
+    }
 
     public function listing()
     {
@@ -69,12 +82,21 @@ class Produk_Model extends CI_Model
         $this->db->from('produk');
         // Join dg 2 tabel
         $this->db->join('kategori', 'kategori.id = produk.produk_kategori', 'LEFT');
+        $this->db->where('produk_user_id = ', $this->session->userdata('penjual_id'));
         // End join
         $this->db->order_by('produk_id', 'ASC');
         $query = $this->db->get();
         return $query->result();
     }
 
+    public function get_nama_penjual($id){
+        $sql = "SELECT * FROM produk WHERE produk_id = ? LIMIT ?";
+        $exec =$this->db->query($sql, array($id, 1));
+        $result = $exec->result();
+        $query = "SELECT * FROM penjual where penjual_id = ? LIMIT ?";
+        $execute = $this->db->query($query, array($result[0]->produk_user_id, 1));
+        return $execute->result();
+    }
 
     public function get_all_product()
     {

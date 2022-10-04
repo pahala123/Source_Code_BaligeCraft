@@ -42,9 +42,9 @@
                                 <span class="lnr lnr-chevron-down"></span>
                             </a>
                             <ul class="dropdown-menu menu">
-                                <li class="nav-item"><a class="nav-link" href="user/akun"><span class="lnr lnr-user"> Akun Saya</span> </a></li>
-                                <li class="nav-item"><a class="nav-link" href="user/settings"><span class="lnr lnr-cog"> Settings</span></a></li>
-                                <li class="nav-item"><a class="nav-link" href="logout"><span class="lnr lnr-exit"> Logout</span></a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo base_url('user/akun')?>"><span class="lnr lnr-user"> Akun Saya</span> </a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo base_url('user/settings')?>"><span class="lnr lnr-cog"> Settings</span></a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo base_url('user/logout') ?>"><span class="lnr lnr-exit"> Logout</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -89,6 +89,8 @@
                         <h2>Rp.<?php echo $this->cart->format_number($get_detail_product->produk_harga); ?></h2>
                         <ul class="list">
                             <li><a class="active" href="#"><span>Kategori</span> : <?php echo $get_detail_product->kategori_nama ?></a></li>
+                            </br>
+                            <li><a class="active" href="#"><span>Penjual</span> : <?php echo $get_nama_penjual ?  $get_nama_penjual[0]->nama : '' ?></a></li>
                             </br>
                             <li><a href="#"><span>Stok</span> : <?php echo $get_detail_product->produk_kuantitas ?></a></li>
                         </ul>

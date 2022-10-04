@@ -256,6 +256,7 @@ class Penjual extends CI_Controller
             'produk_harga'              => $i->post('produk_harga'),
             'produk_kuantitas'          => $i->post('produk_kuantitas'),
             'produk_terbaik'            => $i->post('produk_terbaik'),
+            'produk_user_id'            => $this->session->userdata('penjual_id'),
         );
         $this->session->set_userdata('upload_image_file_manager', true);
         $valid = $this->form_validation;
@@ -413,6 +414,7 @@ class Penjual extends CI_Controller
                     $data = [
                         'email' => $penjual['email'],
                         'nama' => $penjual['nama'],
+                        'penjual_id' => $penjual['penjual_id'],
                     ];
                     $this->session->set_userdata($data);
                     $this->session->set_flashdata('login-penjual', 'Berhasil!');
@@ -947,6 +949,7 @@ class Penjual extends CI_Controller
     {
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('username');
+        $this->session->unset_userdata('penjual_id');
         $this->session->set_flashdata('logout-penjual', 'berhasil');
         redirect('penjual/index_login');
     }
